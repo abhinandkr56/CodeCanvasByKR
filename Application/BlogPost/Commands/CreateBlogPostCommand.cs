@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.BlogPost.Commands;
 
-public class CreateBlogPostCommand : ICommand
+public class CreateBlogPostCommand : IMessage
 {
     public Guid Id { get; set; }
 

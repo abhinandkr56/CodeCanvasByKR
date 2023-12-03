@@ -19,7 +19,8 @@ public class CreateBlogPostCommandHandler :  IHandleMessages<CreateBlogPostComma
         var id = Guid.NewGuid();
         var streamName = _eventStoreRepository.GetEventStreamName(typeof(Domain.BlogPost.BlogPost), id);
         var blogPostCreatedEvent =
-            new BlogPostEventCreated(id, message.Title, message.Content, new Author(message.Author), message.PublishedDate);
+            new BlogPostEventCreated(id, message.Title, message.Content, new Author(message.Author),
+                message.PublishedDate);
         await _eventStoreRepository.SaveEventAsync(streamName, blogPostCreatedEvent);
 
         await context.Reply(new CreateBlogPostCommandResponse

@@ -24,6 +24,7 @@ public class ExceptionHandingMiddleware
         {
             _logger.LogError("An Unhandled exception occured.");
             await HandleException(context, e);
+            throw;
         }
     }
 
