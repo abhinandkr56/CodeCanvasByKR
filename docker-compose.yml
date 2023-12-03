@@ -1,0 +1,36 @@
+﻿version: '3.8'
+
+services:
+  esdb-node:
+    image: eventstore/eventstore:latest
+    container_name: esdb-node
+    command: --insecure --run-projections=All --enable-external-tcp --enable-atom-pub-over-http
+    ports:
+      - "2113:2113"
+      - "1113:1113"
+    networks:
+      - codecanvas-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: some-rabbit
+    hostname: my-rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - codecanvas-network
+
+  seq:
+    image: datalust/seq
+    container_name: seq-codecanvasbykr
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5344:80"
+    networks:
+      - codecanvas-network
+
+networks:
+  codecanvas-network:
+    driver: bridge
