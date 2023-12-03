@@ -17,6 +17,7 @@ public class BlogPostController : ControllerBase
     [Route("Create")]
     public async Task<IActionResult> CreateBlogPost(CreateBlogPostCommand createBlogPostCommand)
     {
+        _logger.LogInformation("Post Api hit for blog post");
         await _endpointInstance.Send(createBlogPostCommand)
             .ConfigureAwait(false);
         // var response = await _endpointInstance.Send<CreateBlogPostCommandResponse>(createBlogPostCommand,
